@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module" src="./data.js"></script>
+    <script type="module" src="./modify.js"></script>
+
+    <!-- 异步引入的不需要导入 -->
+    <!-- <script type="module" src="./asyncdata.js"></script> -->   
+
+    <script type="module">
+
+        import('./asyncdata.js').then(module => {
+            module.default()
+            console.log(module.num)
+        })
+
+        import * as data from './data.js'
+        import * as modify from './modify.js'
+
+        function logdata() {
+            console.log(data.n)
+            console.log(data.obj)
+            console.log(data.nullable)
+        }
+
+
+        let logdatabtn = document.createElement('button')
+        logdatabtn.onclick = logdata
+        logdatabtn.textContent = 'logdata'
+        document.body.appendChild(logdatabtn)
+
+
+        let change_n_btn = document.createElement('button')
+        change_n_btn.onclick = modify.change_n
+        change_n_btn.textContent = 'change_n'
+        document.body.appendChild(change_n_btn)
+
+
+        let change_obj_property_btn = document.createElement('button')
+        change_obj_property_btn.onclick = modify.change_obj_property
+        change_obj_property_btn.textContent = 'change_obj_property'
+        document.body.appendChild(change_obj_property_btn)
+
+        let change_ojb_ref_btn = document.createElement('button')
+        change_ojb_ref_btn.onclick = modify.change_ojb_ref
+        change_ojb_ref_btn.textContent = 'change_ojb_ref'
+        document.body.appendChild(change_ojb_ref_btn)
+
+        let change_nullable_btn = document.createElement('button')
+        change_nullable_btn.onclick = modify.change_nullable
+        change_nullable_btn.textContent = 'change_nullable'
+        document.body.appendChild(change_nullable_btn)
+
+        let call_nullable_fn_btn = document.createElement('button')
+        call_nullable_fn_btn.onclick = data.nullable
+        call_nullable_fn_btn.textContent = 'call_nullable_fn'
+        document.body.appendChild(call_nullable_fn_btn)
+
+        let change_nullable_fn_btn = document.createElement('button')
+        change_nullable_fn_btn.onclick = data.change_nullable_fn
+        change_nullable_fn_btn.textContent = 'change_nullable_fn'
+        document.body.appendChild(change_nullable_fn_btn)
+
+
+    </script>
+</body>
+
+</html>
